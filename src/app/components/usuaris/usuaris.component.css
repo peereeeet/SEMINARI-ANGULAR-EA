@@ -48,7 +48,6 @@ input, textarea {
   border-radius: 8px;
   width: 100%;
   margin-bottom: 15px;
-  margin-right: 10px; /* Margen a la derecha para separar del contenedor */
   box-sizing: border-box; /* Incluir padding y borde dentro del ancho */
 }
 
@@ -85,11 +84,16 @@ input, textarea {
   margin: 10px 0;
   border-radius: 8px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column; /* Cambiar a columna para apilar detalles */
 }
 
 /* Estilo del texto de la información de usuarios */
+.user-info {
+  display: flex;
+  justify-content: space-between; /* Separación entre nombre y botones */
+  width: 100%;
+}
+
 .user-info strong {
   font-size: 1.5rem; /* Aumentar el tamaño de la letra */
   color: #FAF3E0; /* Blanco roto */
@@ -107,6 +111,8 @@ input, textarea {
 .button-container {
   display: flex;
   gap: 10px;
+  justify-content: flex-end; /* Alinear botones a la derecha */
+  margin-top: 10px; /* Añadir margen superior para separar de detalles */
 }
 
 /* Botones */
@@ -117,7 +123,6 @@ button {
   font-size: 0.9rem; /* Reducir el tamaño de la letra de los botones */
   color: white;
   cursor: pointer;
-  margin-left: 10px;
 }
 
 /* Botón de mostrar detalles (verde claro) */
@@ -146,6 +151,7 @@ button.modificar {
 button.modificar:hover {
   background-color: #6B8E23; /* Más oscuro al hacer hover */
 }
+
 /* Botón de leer más/leer menos igual al de mostrar detalles */
 button.leer-mas {
   background-color: #4CAF50; /* Verde claro */
@@ -155,3 +161,26 @@ button.leer-mas:hover {
   background-color: #66BB6A; /* Más claro al hacer hover */
 }
 
+/* Estilos para los detalles del usuario */
+.user-details {
+  display: flex;
+  flex-direction: column; /* Apila los elementos verticalmente */
+}
+
+/* Alineación de los detalles y experiencias a la derecha */
+.user-details > p {
+  display: flex;
+  justify-content: space-between; /* Espacio entre el texto y los valores */
+  align-items: center; /* Alinea los elementos en el centro */
+}
+
+.user-details p:last-child {
+  justify-content: flex-end; /* Alinea las experiencias a la derecha */
+}
+
+/* Estilo para el contenedor de experiencias */
+.experiencias {
+  margin-top: 20px; /* Añadir margen superior para separación */
+  display: flex;
+  flex-direction: column; /* Alinear elementos verticalmente */
+}

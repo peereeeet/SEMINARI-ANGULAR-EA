@@ -5,6 +5,7 @@ import { User } from '../../models/user.model'; // Importar el modelo User desde
 import { UserService } from '../../services/user.service'; // Importar el servicio UserService desde la subcarpeta services
 import { TruncatePipe } from '../../pipes/truncate.pipe';
 import { MaskEmailPipe } from '../../pipes/maskEmail.pipe';
+import { Experiencia } from '../../models/experiencia.model';
 
 
 @Component({
@@ -20,12 +21,14 @@ export class UsuarisComponent implements OnInit {
   desplegado: boolean[] = []; // Controla si el desplegable de cada usuario está abierto o cerrado
   desplegarBiografia: boolean[] = [];
   mostrarPassword: boolean[] = []; // Array para controlar la visibilidad de la contraseña
+  experiencias: number[] = []; // Añadir esta línea para inicializar experiencias
 
   nuevoUsuario: User = {
     name: '',
     mail: '', // Añadir el campo email
     password: '',
-    comment: ''
+    comment: '',
+    experiences: []
   };
 
   confirmarPassword: string = ''; // Campo para confirmar la contraseña
@@ -37,11 +40,15 @@ export class UsuarisComponent implements OnInit {
 
   ngOnInit(): void {
     // Cargar usuarios desde el UserService
-    this.userService.getUsers()
-      .subscribe(data => {
+    this.userService.getUsers().subscribe(
+      (data: User[]) => {
         this.usuarios = data;
         this.desplegado = new Array(data.length).fill(false);
-      });
+      },
+      error => {
+        console.error('Error al cargar usuarios:', error);
+      }
+    );
   }
 
   // Función para agregar o modificar un usuario
@@ -71,7 +78,8 @@ export class UsuarisComponent implements OnInit {
         name: this.nuevoUsuario.name,
         mail: this.nuevoUsuario.mail,
         password: this.nuevoUsuario.password,
-        comment: this.nuevoUsuario.comment
+        comment: this.nuevoUsuario.comment,
+        experiences: [] 
       };
   
       // Enviar el usuario a la API a través del UserService
@@ -88,6 +96,12 @@ export class UsuarisComponent implements OnInit {
     this.resetForm(userForm);
   }
   
+  // Método para manejar el cambio de experiencia
+  agregarExperiencia(usuarioId: string, event: Event): void {
+    const selectElement = event.target as HTMLSelectElement; 
+    const selectedValue = selectElement.value; 
+    console.log(`Usuario ID: ${usuarioId}, Experiencia: ${selectedValue}`);
+  }
 
   // Función para limpiar el formulario
   resetForm(userForm: NgForm): void { // Aceptar userForm como parámetro
@@ -95,7 +109,8 @@ export class UsuarisComponent implements OnInit {
       name: '',
       mail: '', // Limpiar el campo email
       password: '',
-      comment: ''
+      comment: '',
+      experiences: []
     };
     this.confirmarPassword = ''; // Reiniciar el campo de confirmar contraseña
     this.formSubmitted = false; // Restablecer el estado del formulario para no mostrar errores
@@ -152,7 +167,4 @@ export class UsuarisComponent implements OnInit {
   togglePassword(index: number): void {
     this.mostrarPassword[index] = !this.mostrarPassword[index]; // Cambiamos entre true y false
   }
-
 }
-
-

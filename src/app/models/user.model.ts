@@ -4,5 +4,6 @@ export interface User {
   mail: string;     // Añadir el campo email
   password: string;
   comment: string;    // Este campo es la "Biografía"
+  experiences: number[];
 }
   

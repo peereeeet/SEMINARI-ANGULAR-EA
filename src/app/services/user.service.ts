@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
+import { Experiencia } from '../models/experiencia.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,14 @@ export class UserService {
   deleteUserById(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
+
+  // Obtener todas las experiencias
+  getExperiencias(): Observable<number[]> {
+    return this.http.get<number[]>('http://localhost:3000/api/experiencias'); 
+  }
+
+  // Obtener experiencias por ID
+  getExperienciaById(id: string): Observable<Experiencia> {
+    return this.http.get<Experiencia>(`http://localhost:3000/api/experiencias/${id}`);
+  }
 }
-
-

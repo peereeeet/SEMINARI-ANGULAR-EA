@@ -113,6 +113,16 @@
           </button>        
 
           <button (click)="prepararEdicion(usuario, i)" class="modificar">Modificar</button>
+
+          <!-- Muestra las experiencias del usuario -->
+         <p><strong>Experiencias:</strong>
+           <span *ngFor="let exp of usuario.experiences">{{ exp }} </span>
+         </p>
+            
+         <select (change)="usuario._id ? agregarExperiencia(usuario._id, $event) : null">
+           <option *ngFor="let exp of usuario.experiences" [value]="exp">Experiencia {{ exp }}</option>
+         </select>
+
         </div>
       </li>
     </ul>

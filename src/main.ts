@@ -13,8 +13,3 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(BrowserModule, RouterModule, HttpClientModule) // Importa HttpClientModule
   ]
 }).catch((err) => console.error(err));
-
-
-
-
-
