@@ -1,1 +1,1 @@
-Versió FINAL
+# Ejercicio Seminario 6- ANGULAR
